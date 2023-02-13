@@ -18,10 +18,10 @@ class Post {
 
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-        albumId: json["userId"],
+        albumId: json["albumId"],
         id: json["id"],
         title: json["title"],
-        url: json["body"],
+        url: json["url"],
         thumbnailUrl: json['thumbnailUrl']
       );
 
@@ -29,6 +29,7 @@ class Post {
         "albumId": albumId,
         "id": id,
         "title": title,
+        "url": url,
         "thumbnailUrl": thumbnailUrl,
       };
 }

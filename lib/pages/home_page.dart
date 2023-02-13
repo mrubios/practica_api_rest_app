@@ -15,6 +15,14 @@ class _HomePageState extends State<HomePage> {
   bool isLoaded = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    // Llamamos a obtener los post
+    obtenerPosts();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -27,32 +35,37 @@ class _HomePageState extends State<HomePage> {
           child: CircularProgressIndicator(),
         ),
         child: ListView.builder(
-          itemCount: 1,//listaDePosts?.length
+          itemCount: listaDePosts?.length,
           itemBuilder: (context, index) {
             return Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          listaDePosts![index].title,
+                          maxLines: 2,
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+
+                        //Image.network(listaDePosts![index].url),
+                      ],
+                    ),
+                  ),
                   Container(
                     height: 50,
                     width: 50,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(12)),
-                    color: Colors.black,
+                    padding: EdgeInsets.only(left: 10),
+                    child: Image.network(listaDePosts![index].url),
                   ),
-                  const SizedBox(width: 20,),
-                  Expanded(child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        listaDePosts![index].title,
-                        maxLines: 2,
-                        overflow: TextOverflow.fade,
-                        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                      ),
-                      Image.network(listaDePosts![index].url),
-                    ],
-                  ))
                 ],
               ),
             );
